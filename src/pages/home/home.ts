@@ -42,10 +42,26 @@ export class HomePage {
         position: this.map.getCenter()
       });
 
+
+      const content = `<a href="https://www.google.com/maps?q=${latLng}" target="_system">Open your location on Google Maps</a>`;
+
+      this.addInfoWindow(marker, content);
+
     }, err => {
       console.log(err);
     });
 
+  }
+
+
+  addInfoWindow(marker, content){
+    const infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
   }
 
 }
